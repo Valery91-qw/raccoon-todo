@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 export default function Header() {
   return (
-    <AppBar position="fixed">
+    <AppBar position="relative">
       <Toolbar>
         <TextField variant="standard" label="ToDo name" required />
         <ButtonBase>
