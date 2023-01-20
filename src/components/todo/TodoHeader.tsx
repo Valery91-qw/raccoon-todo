@@ -3,8 +3,11 @@ import {
 } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import React, { useState } from 'react';
+import { useAppDataContext } from '../../context/AppDataContext';
 
 export default function TodoHeader({ name } : { name: string }) {
+  const { removeTodo } = useAppDataContext();
+
   const [element, seElement] = useState<undefined | null | HTMLElement>(null);
   const isOpen = Boolean(element);
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,6 +42,7 @@ export default function TodoHeader({ name } : { name: string }) {
       >
         <MenuItem>Add task</MenuItem>
         <MenuItem>show news</MenuItem>
+        <MenuItem onClick={() => removeTodo(name)}>Remove todol</MenuItem>
       </Menu>
     </CardContent>
   );
