@@ -3,7 +3,7 @@ import {
 } from 'react';
 import { CssBaseline } from '@mui/material';
 
-const ThemeContext = createContext({});
+const ThemeContext = createContext('');
 
 export function useThemeContext() {
   return useContext(ThemeContext);
@@ -11,7 +11,7 @@ export function useThemeContext() {
 
 export function AppContextProvider({ children } : typeof children) {
   return (
-    <ThemeContext.Provider>
+    <ThemeContext.Provider value="">
       <CssBaseline>
         {children}
       </CssBaseline>

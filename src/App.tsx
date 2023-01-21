@@ -1,17 +1,19 @@
 import { Grid } from '@mui/material';
 import Header from './components/Header';
 import Todo from './components/todo/Todo';
-import { useAppDataContext } from './context/AppDataContext';
+import { useTodo } from './context/AppDataContext';
 
 function App() {
-  const { todos } = useAppDataContext();
+  const { todos } = useTodo();
 
   return (
     <>
       <Header />
       <Grid container spacing={4} px={10} mt={1}>
         {
-            todos.map((el) => <Todo key={el.todoName} name={el.todoName} tasks={el.tasks} />)
+            todos.map(
+              (el) => <Todo key={el.id} id={el.id} title={el.todoTitle} />,
+            )
           }
       </Grid>
     </>

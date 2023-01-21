@@ -3,10 +3,10 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { ChangeEvent, useState } from 'react';
-import { useAppDataContext } from '../context/AppDataContext';
+import { useTodo } from '../context/AppDataContext';
 
 export default function Header() {
-  const { addTodo } = useAppDataContext();
+  const { addTodo } = useTodo();
 
   const [value, setValue] = useState<string>('');
 

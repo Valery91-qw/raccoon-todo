@@ -3,10 +3,10 @@ import {
 } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import React, { useState } from 'react';
-import { useAppDataContext } from '../../context/AppDataContext';
+import { useTodo } from '../../context/AppDataContext';
 
-export default function TodoHeader({ name } : { name: string }) {
-  const { removeTodo } = useAppDataContext();
+export default function TodoHeader({ id, name } : { id: string, name: string }) {
+  const { deleteTodo, addTaskList } = useTodo();
 
   const [element, seElement] = useState<undefined | null | HTMLElement>(null);
   const isOpen = Boolean(element);
@@ -40,9 +40,9 @@ export default function TodoHeader({ name } : { name: string }) {
           horizontal: -200,
         }}
       >
-        <MenuItem>Add task</MenuItem>
+        <MenuItem onClick={() => addTaskList(id, 'hello')}>Add taskList</MenuItem>
         <MenuItem>show news</MenuItem>
-        <MenuItem onClick={() => removeTodo(name)}>Remove todol</MenuItem>
+        <MenuItem onClick={() => deleteTodo(id)}>Remove todol</MenuItem>
       </Menu>
     </CardContent>
   );
