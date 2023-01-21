@@ -33,17 +33,36 @@ export const appReducer = (state: StateType, action: ActionsType): StateType => 
         todos: [...state.todos, { id: uuid(), todoTitle: action.payload, tasksList: [] }],
       };
     case 'DELETE_TODO':
-      return { ...state, todos: state.todos.filter((el) => el.id !== action.payload) };
+      return { ...state, todos: state.todos.filter((todo) => todo.id !== action.payload) };
     case 'ADD_TASKS_LIST':
       return {
         ...state,
         todos: state.todos.map(
-          (el) => (el.id === action.payload.todoId
+          (todo) => (todo.id === action.payload.todoId
             ? {
-              ...el,
-              tasksList: [...el.tasksList, { id: uuid(), title: action.payload.title, tasks: [] }],
+              ...todo,
+              tasksList: [
+                ...todo.tasksList, { id: uuid(), title: action.payload.title, tasks: [] },
+              ],
             }
-            : { ...el }),
+            : { ...todo }),
+        ),
+      };
+    case 'DELETE_TASK_LIST':
+      return {
+        ...state,
+        todos: state.todos.map(
+          (todo) => (
+            todo.id === action.payload.todoId
+              ? {
+                ...todo,
+                tasksList: todo.tasksList.filter(
+                  (taskList) => taskList.id !== action.payload.taskListId,
+                ),
+              } : {
+                ...todo,
+              }
+          ),
         ),
       };
     default:

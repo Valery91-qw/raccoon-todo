@@ -18,7 +18,9 @@ export default function Todo({ id, title }: TodoType) {
       <Card>
         <TodoHeader id={id} name={title} />
         {
-              tasksList.map((el) => <TaskList key={el.id} title={el.title} />)
+              tasksList.map(
+                (el) => <TaskList key={el.id} title={el.title} todoId={id} id={el.id} />,
+              )
           }
       </Card>
     </Grid>

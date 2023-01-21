@@ -1,8 +1,11 @@
 import {
+  ButtonBase,
   Collapse,
-  List, ListItemText, Switch, TextField,
+  List, ListItemText, Switch,
 } from '@mui/material';
 import { useState } from 'react';
+import { Remove } from '@mui/icons-material';
+import { useTasks } from '../../../context/AppDataContext';
 
 const taskList = [
   { task: 'one' },
@@ -10,12 +13,19 @@ const taskList = [
   { task: 'tree' },
 ];
 
-export default function TaskList({ title } : { title: string }) {
+export default function TaskList(
+  { title, todoId, id } : { title: string, todoId: string, id: string },
+) {
+  const { deleteTaskList } = useTasks(todoId);
+
   const [open, setOpen] = useState(false);
 
   return (
     <List subheader={(
       <ListItemText>
+        <ButtonBase onClick={() => deleteTaskList(todoId, id)}>
+          <Remove />
+        </ButtonBase>
         {title}
         <Switch onClick={() => setOpen((prevState) => !prevState)} />
       </ListItemText>
