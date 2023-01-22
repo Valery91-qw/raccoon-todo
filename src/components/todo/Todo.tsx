@@ -5,21 +5,28 @@ import TodoHeader from './TodoHeader';
 import { useTasks } from '../../context/AppDataContext';
 import TaskList from './taskList/TaskList';
 
-type TodoType = {
+interface ITodo {
   id: string
   title: string
-};
+}
 
-export default function Todo({ id, title }: TodoType) {
+export default function Todo({ id, title }: ITodo) {
   const { tasksList } = useTasks(id);
 
   return (
     <Grid item md={4} sm={6} xs={12} textAlign="center">
       <Card>
-        <TodoHeader id={id} name={title} />
+        <TodoHeader id={id} title={title} />
         {
               tasksList.map(
-                (el) => <TaskList key={el.id} title={el.title} todoId={id} id={el.id} />,
+                (taskList) => (
+                  <TaskList
+                    key={taskList.id}
+                    id={taskList.id}
+                    todoId={id}
+                    title={taskList.title}
+                  />
+                ),
               )
           }
       </Card>

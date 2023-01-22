@@ -1,15 +1,11 @@
 import {
-  createContext, useContext,
+  createContext,
 } from 'react';
 import { CssBaseline } from '@mui/material';
 
 const ThemeContext = createContext('');
 
-export function useThemeContext() {
-  return useContext(ThemeContext);
-}
-
-export function AppContextProvider({ children } : typeof children) {
+export default function AppContextProvider({ children } : typeof children) {
   return (
     <ThemeContext.Provider value="">
       <CssBaseline>

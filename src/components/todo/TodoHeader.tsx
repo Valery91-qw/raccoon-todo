@@ -5,7 +5,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import React, { useState } from 'react';
 import { useTodo } from '../../context/AppDataContext';
 
-export default function TodoHeader({ id, name } : { id: string, name: string }) {
+interface ITodoHeader {
+  id: string,
+  title: string
+}
+
+export default function TodoHeader({ id, title } : ITodoHeader) {
   const { deleteTodo, addTaskList } = useTodo();
 
   const [element, seElement] = useState<undefined | null | HTMLElement>(null);
@@ -21,7 +26,7 @@ export default function TodoHeader({ id, name } : { id: string, name: string }) 
   return (
     <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <Typography fontSize="1.5rem">
-        {name}
+        {title}
       </Typography>
       <ButtonBase onClick={handleClick}>
         <SettingsIcon />

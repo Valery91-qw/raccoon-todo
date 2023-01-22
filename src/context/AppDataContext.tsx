@@ -1,27 +1,27 @@
 import {
-  createContext, useCallback, useContext, useReducer,
+  createContext, useCallback, useContext, useMemo, useReducer,
 } from 'react';
-import {
-  appReducer, initState, StateType,
-} from './reducer';
+import { Actions, ActionsType, StateType } from './reducer/reducer.types';
+import { appReducer, initState } from './reducer/reducer';
 
 const useAppDataContext = (init: StateType) => {
-  const [state, dispatch] = useReducer(appReducer, init);
+  const [state, dispatch] = useReducer<(state: StateType, actions: ActionsType)
+  => StateType, StateType>(appReducer, init);
 
   const addTodo = useCallback((title: string) => {
-    dispatch({ type: 'ADD_TODO', payload: title });
+    dispatch({ type: Actions.ADD_TODO, payload: title });
   }, []);
 
   const deleteTodo = useCallback((id: string) => {
-    dispatch({ type: 'DELETE_TODO', payload: id });
+    dispatch({ type: Actions.DELETE_TODO, payload: id });
   }, []);
 
   const addTaskList = useCallback((todoId: string, title: string) => {
-    dispatch({ type: 'ADD_TASKS_LIST', payload: { todoId, title } });
+    dispatch({ type: Actions.ADD_TASK_LIST, payload: { todoId, title } });
   }, []);
 
   const deleteTaskList = useCallback((todoId: string, taskListId: string) => {
-    dispatch({ type: 'DELETE_TASK_LIST', payload: { todoId, taskListId } });
+    dispatch({ type: Actions.DELETE_TASK_LIST, payload: { todoId, taskListId } });
   }, []);
 
   return {

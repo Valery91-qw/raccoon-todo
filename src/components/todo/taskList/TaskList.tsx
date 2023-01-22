@@ -13,8 +13,14 @@ const taskList = [
   { task: 'tree' },
 ];
 
+interface ITaskList {
+  id: string
+  todoId: string
+  title: string
+}
+
 export default function TaskList(
-  { title, todoId, id } : { title: string, todoId: string, id: string },
+  { id, todoId, title } : ITaskList,
 ) {
   const { deleteTaskList } = useTasks(todoId);
 
