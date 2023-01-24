@@ -1,5 +1,5 @@
 import {
-  createContext, useCallback, useContext, useMemo, useReducer,
+  createContext, useCallback, useContext, useReducer,
 } from 'react';
 import { Actions, ActionsType, StateType } from './reducer/reducer.types';
 import { appReducer, initState } from './reducer/reducer';

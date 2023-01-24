@@ -1,11 +1,10 @@
 import {
-  ButtonBase,
   Collapse,
-  List, ListItemText, Switch,
+  List,
 } from '@mui/material';
-import { useState } from 'react';
-import { Remove } from '@mui/icons-material';
-import { useTasks } from '../../../context/AppDataContext';
+import { ChangeEvent, useState } from 'react';
+import TaskListHeader from './TaskListHeader';
+import Task from './task/Task';
 
 const taskList = [
   { task: 'one' },
@@ -22,29 +21,18 @@ interface ITaskList {
 export default function TaskList(
   { id, todoId, title } : ITaskList,
 ) {
-  const { deleteTaskList } = useTasks(todoId);
-
   const [open, setOpen] = useState(false);
 
   return (
-    <List subheader={(
-      <ListItemText>
-        <ButtonBase onClick={() => deleteTaskList(todoId, id)}>
-          <Remove />
-        </ButtonBase>
-        {title}
-        <Switch onClick={() => setOpen((prevState) => !prevState)} />
-      </ListItemText>
+    <List
+      subheader={(
+        <TaskListHeader todoId={todoId} id={id} title={title} setOpen={setOpen} />
       )}
     >
-      <Collapse in={open}>
+      <Collapse in={open} unmountOnExit>
         {
             taskList.map((el) => (
-              <List key={el.task}>
-                <ListItemText>
-                  {el.task}
-                </ListItemText>
-              </List>
+              <Task key={el.task} task={el.task} />
             ))
         }
       </Collapse>

@@ -1,14 +1,20 @@
-type TaskList = {
+type TaskType = {
+  id: string,
+  title: string
+  isDone: boolean
+};
+
+type TaskListType = {
   id: string
   title: string
 
-  tasks: []
+  tasks: Array<TaskType>
 };
 
 type TodoType = {
   id: string,
   todoTitle: string,
-  tasksList: Array<TaskList>
+  tasksList: Array<TaskListType>
 };
 
 export type StateType = {

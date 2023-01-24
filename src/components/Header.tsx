@@ -21,7 +21,7 @@ export default function Header() {
   };
 
   return (
-    <AppBar position="relative">
+    <AppBar position="sticky">
       <Toolbar>
         <TextField variant="standard" label="Todo name" onChange={handleChange} value={value} required />
         <ButtonBase onClick={handleClick} disabled={!value}>
