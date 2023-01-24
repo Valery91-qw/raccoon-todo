@@ -23,9 +23,18 @@ export default function TodoHeader({ id, title } : ITodoHeader) {
     seElement(null);
   };
 
+  const createDate = () => {
+    const date = new Date();
+    return date.toLocaleString('en-GB', { day: 'numeric', month: '2-digit' });
+  };
+
   return (
     <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Typography fontSize="1.5rem">
+      <Typography fontSize={{
+        sm: '1.5rem',
+        xs: '1rem',
+      }}
+      >
         {title}
       </Typography>
       <ButtonBase onClick={handleClick}>
@@ -45,7 +54,7 @@ export default function TodoHeader({ id, title } : ITodoHeader) {
           horizontal: -200,
         }}
       >
-        <MenuItem onClick={() => addTaskList(id, 'hello')}>Add taskList</MenuItem>
+        <MenuItem onClick={() => addTaskList(id, createDate())}>Add taskList</MenuItem>
         <MenuItem>show news</MenuItem>
         <MenuItem onClick={() => deleteTodo(id)}>Remove todol</MenuItem>
       </Menu>

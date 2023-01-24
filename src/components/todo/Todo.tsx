@@ -4,6 +4,7 @@ import {
 import TodoHeader from './TodoHeader';
 import { useTaskList } from '../../context/AppDataContext';
 import TaskList from './taskList/TaskList';
+import gridStyles from './Todo.styles';
 
 interface ITodo {
   id: string
@@ -14,7 +15,13 @@ export default function Todo({ id, title }: ITodo) {
   const { tasksList } = useTaskList(id);
 
   return (
-    <Grid item md={4} sm={6} xs={12} textAlign="center">
+    <Grid
+      item={gridStyles.item}
+      sm={gridStyles.sm}
+      md={gridStyles.md}
+      xs={gridStyles.xs}
+      textAlign={gridStyles.textAlign}
+    >
       <Card>
         <TodoHeader id={id} title={title} />
         {

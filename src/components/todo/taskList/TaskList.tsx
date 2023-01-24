@@ -3,7 +3,7 @@ import {
   Collapse,
   List, TextField,
 } from '@mui/material';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Add } from '@mui/icons-material';
 import TaskListHeader from './TaskListHeader';
 import Task from './task/Task';
@@ -19,8 +19,19 @@ export default function TaskList(
   { id, todoId, title } : ITaskList,
 ) {
   const [open, setOpen] = useState(false);
+  const [taskTitle, setTaskTitle] = useState('');
   const { addTask } = useTaskList(todoId);
   const { tasks } = useTask(todoId, id);
+
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setTaskTitle(e.currentTarget.value);
+  };
+
+  const clickHandler = () => {
+    if (!taskTitle) return;
+    addTask(todoId, id, taskTitle.trim());
+    setTaskTitle('');
+  };
 
   return (
     <List
@@ -30,8 +41,13 @@ export default function TaskList(
     >
       <Collapse in={open} unmountOnExit>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <TextField variant="standard" placeholder="Task title" />
-          <ButtonBase onClick={() => addTask(todoId, id, 'task hello')}>
+          <TextField
+            placeholder="Task title"
+            required
+            value={taskTitle}
+            onChange={changeHandler}
+          />
+          <ButtonBase onClick={clickHandler}>
             <Add />
           </ButtonBase>
         </Box>
