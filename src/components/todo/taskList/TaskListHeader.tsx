@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { Dispatch, SetStateAction } from 'react';
-import { useTasks } from '../../../context/AppDataContext';
+import { useTaskList } from '../../../context/AppDataContext';
 
 interface ITaskListHeader {
   id: string,
@@ -15,7 +15,7 @@ interface ITaskListHeader {
 export default function TaskListHeader({
   todoId, id, title, setOpen,
 }: ITaskListHeader) {
-  const { deleteTaskList } = useTasks(todoId);
+  const { deleteTaskList } = useTaskList(todoId);
 
   return (
     <ListItemText disableTypography sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

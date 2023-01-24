@@ -2,17 +2,30 @@ import {
   ButtonBase, List, ListItemText, Switch,
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { useTask } from '../../../../context/AppDataContext';
 
-export default function Task({ task }: { task: string }) {
+interface ITask {
+  todoId: string
+  taskListId: string
+  id: string
+  title: string
+  isDone: boolean
+}
+
+export default function Task({
+  todoId, taskListId, id, title, isDone,
+}: ITask) {
+  const { deleteTask, changeTaskStatus } = useTask(todoId, taskListId);
+
   return (
     <List sx={{ display: 'flex' }}>
-      <ButtonBase>
+      <ButtonBase onClick={() => deleteTask(todoId, taskListId, id)}>
         <Delete />
       </ButtonBase>
       <ListItemText>
-        {task}
+        {!isDone ? title : <del>{title}</del>}
       </ListItemText>
-      <Switch />
+      <Switch checked={isDone} onChange={() => changeTaskStatus(todoId, taskListId, id)} />
     </List>
   );
 }

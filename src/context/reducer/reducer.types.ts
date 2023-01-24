@@ -26,6 +26,9 @@ export const enum Actions {
   DELETE_TODO,
   ADD_TASK_LIST,
   DELETE_TASK_LIST,
+  ADD_TASK,
+  DELETE_TASK,
+  CHANGE_TASK_STATUS,
 }
 
 export type ActionsType = {

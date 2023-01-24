@@ -24,8 +24,20 @@ const useAppDataContext = (init: StateType) => {
     dispatch({ type: Actions.DELETE_TASK_LIST, payload: { todoId, taskListId } });
   }, []);
 
+  const addTask = useCallback((todoId: string, taskListId: string, title: string) => {
+    dispatch({ type: Actions.ADD_TASK, payload: { todoId, taskListId, title } });
+  }, []);
+
+  const deleteTask = useCallback((todoId: string, taskListId: string, taskId: string) => {
+    dispatch({ type: Actions.DELETE_TASK, payload: { todoId, taskListId, taskId } });
+  }, []);
+
+  const changeTaskStatus = useCallback((todoId: string, taskListId: string, taskId: string) => {
+    dispatch({ type: Actions.CHANGE_TASK_STATUS, payload: { todoId, taskListId, taskId } });
+  }, []);
+
   return {
-    state, addTodo, deleteTodo, addTaskList, deleteTaskList,
+    state, addTodo, deleteTodo, addTaskList, deleteTaskList, addTask, deleteTask, changeTaskStatus,
   };
 };
 
@@ -35,6 +47,9 @@ const initialStateContext = {
   deleteTodo: (id: string) => { },
   addTaskList: (todoId: string, title: string) => { },
   deleteTaskList: (todoId: string, taskListId: string) => { },
+  addTask: (todoId: string, taskListId: string, title: string) => { },
+  deleteTask: (todoId: string, taskListId: string, taskId: string) => { },
+  changeTaskStatus: (todoId: string, taskListId: string, taskId: string) => { },
 };
 
 const AppDataContext = createContext<typeof initialStateContext>(initialStateContext);
@@ -48,10 +63,17 @@ export const useTodo = () => {
   };
 };
 
-export const useTasks = (id: string) => {
-  const { state: { todos }, deleteTaskList } = useContext(AppDataContext);
+export const useTaskList = (id: string) => {
+  const { state: { todos }, deleteTaskList, addTask } = useContext(AppDataContext);
   const { tasksList } = todos.find((el) => el.id === id);
-  return { tasksList, deleteTaskList };
+  return { tasksList, deleteTaskList, addTask };
+};
+
+export const useTask = (todoId: string, taskListId: string) => {
+  const { state: { todos }, deleteTask, changeTaskStatus } = useContext(AppDataContext);
+  const { tasksList } = todos.find((el) => el.id === todoId);
+  const { tasks } = tasksList.find((el) => el.id === taskListId);
+  return { tasks, deleteTask, changeTaskStatus };
 };
 export function AppDataProvider({ children }: typeof children) {
   return (

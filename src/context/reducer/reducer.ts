@@ -1,5 +1,7 @@
-import { v4 as uuid } from 'uuid';
 import { Actions, ActionsType, StateType } from './reducer.types';
+import {
+  addTask, addTaskList, addTodo, deleteTask, deleteTaskList, deleteTodo, changeTaskStatus,
+} from './reducer.utils';
 
 export const initState: StateType = {
   todos: [],
@@ -8,44 +10,19 @@ export const initState: StateType = {
 export const appReducer = (state: StateType, action: ActionsType): StateType => {
   switch (action.type) {
     case Actions.ADD_TODO:
-      return {
-        ...state,
-        todos: [...state.todos, { id: uuid(), todoTitle: action.payload, tasksList: [] }],
-      };
+      return addTodo(state, action);
     case Actions.DELETE_TODO:
-      return { ...state, todos: state.todos.filter((todo) => todo.id !== action.payload) };
+      return deleteTodo(state, action);
     case Actions.ADD_TASK_LIST:
-      return {
-        ...state,
-        todos: state.todos.map(
-          (todo) => (todo.id === action.payload.todoId
-            ? {
-              ...todo,
-              tasksList: [
-                { id: uuid(), title: action.payload.title, tasks: [] },
-                ...todo.tasksList,
-              ],
-            }
-            : { ...todo }),
-        ),
-      };
+      return addTaskList(state, action);
     case Actions.DELETE_TASK_LIST:
-      return {
-        ...state,
-        todos: state.todos.map(
-          (todo) => (
-            todo.id === action.payload.todoId
-              ? {
-                ...todo,
-                tasksList: todo.tasksList.filter(
-                  (taskList) => taskList.id !== action.payload.taskListId,
-                ),
-              } : {
-                ...todo,
-              }
-          ),
-        ),
-      };
+      return deleteTaskList(state, action);
+    case Actions.ADD_TASK:
+      return addTask(state, action);
+    case Actions.DELETE_TASK:
+      return deleteTask(state, action);
+    case Actions.CHANGE_TASK_STATUS:
+      return changeTaskStatus(state, action);
     default:
       throw new Error(`action with such type '${action.type}' not handle`);
   }

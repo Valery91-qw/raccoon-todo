@@ -2,7 +2,7 @@ import {
   Card, Grid,
 } from '@mui/material';
 import TodoHeader from './TodoHeader';
-import { useTasks } from '../../context/AppDataContext';
+import { useTaskList } from '../../context/AppDataContext';
 import TaskList from './taskList/TaskList';
 
 interface ITodo {
@@ -11,7 +11,7 @@ interface ITodo {
 }
 
 export default function Todo({ id, title }: ITodo) {
-  const { tasksList } = useTasks(id);
+  const { tasksList } = useTaskList(id);
 
   return (
     <Grid item md={4} sm={6} xs={12} textAlign="center">
