@@ -1,6 +1,7 @@
 type TaskType = {
   id: string,
   title: string
+  description: string
   isDone: boolean
 };
 
@@ -19,19 +20,4 @@ type TodoType = {
 
 export type StateType = {
   todos: Array<TodoType>
-};
-
-export const enum Actions {
-  ADD_TODO,
-  DELETE_TODO,
-  ADD_TASK_LIST,
-  DELETE_TASK_LIST,
-  ADD_TASK,
-  DELETE_TASK,
-  CHANGE_TASK_STATUS,
-}
-
-export type ActionsType = {
-  type: Actions
-  payload?: any
 };

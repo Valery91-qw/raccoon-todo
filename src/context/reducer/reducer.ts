@@ -1,7 +1,8 @@
-import { Actions, ActionsType, StateType } from './reducer.types';
+import { StateType } from './reducer.types';
 import {
   addTask, addTaskList, addTodo, deleteTask, deleteTaskList, deleteTodo, changeTaskStatus,
 } from './reducer.utils';
+import { Actions, ActionsType } from './action.types';
 
 export const initState: StateType = {
   todos: [],

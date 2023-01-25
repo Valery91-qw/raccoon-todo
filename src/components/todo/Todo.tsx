@@ -29,7 +29,7 @@ export default function Todo({ id, title }: ITodo) {
                 (taskList) => (
                   <TaskList
                     key={taskList.id}
-                    id={taskList.id}
+                    taskListId={taskList.id}
                     todoId={id}
                     title={taskList.title}
                   />

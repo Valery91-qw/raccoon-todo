@@ -1,16 +1,16 @@
 import { v4 as uuid } from 'uuid';
-import { ActionsType, StateType } from './reducer.types';
+import { StateType } from './reducer.types';
 
-const addTodo = (state: StateType, action: ActionsType): StateType => ({
+const addTodo = (state: StateType, action): StateType => ({
   ...state,
   todos: [...state.todos, { id: uuid(), todoTitle: action.payload, tasksList: [] }],
 });
 
-const deleteTodo = (state: StateType, action: ActionsType): StateType => ({
+const deleteTodo = (state: StateType, action): StateType => ({
   ...state, todos: state.todos.filter((todo) => todo.id !== action.payload),
 });
 
-const addTaskList = (state: StateType, action: ActionsType): StateType => ({
+const addTaskList = (state: StateType, action): StateType => ({
   ...state,
   todos: state.todos.map(
     (todo) => (todo.id === action.payload.todoId
@@ -25,7 +25,7 @@ const addTaskList = (state: StateType, action: ActionsType): StateType => ({
   ),
 });
 
-const deleteTaskList = (state: StateType, action: ActionsType): StateType => ({
+const deleteTaskList = (state: StateType, action): StateType => ({
   ...state,
   todos: state.todos.map(
     (todo) => (
@@ -42,14 +42,22 @@ const deleteTaskList = (state: StateType, action: ActionsType): StateType => ({
   ),
 });
 
-const addTask = (state: StateType, action: ActionsType): StateType => ({
+const addTask = (state: StateType, action): StateType => ({
   ...state,
   todos: state.todos.map(
     (todo) => (todo.id === action.payload.todoId ? {
       ...todo,
       tasksList: todo.tasksList.map((taskList) => (taskList.id === action.payload.taskListId ? {
         ...taskList,
-        tasks: [{ id: uuid(), title: action.payload.title, isDone: false }, ...taskList.tasks],
+        tasks: [
+          {
+            id: uuid(),
+            title: action.payload.title,
+            description: action.payload.description,
+            isDone: false,
+          },
+          ...taskList.tasks,
+        ],
       } : {
         ...taskList,
       })),
@@ -60,7 +68,7 @@ const addTask = (state: StateType, action: ActionsType): StateType => ({
   ),
 });
 
-const deleteTask = (state: StateType, action: ActionsType): StateType => ({
+const deleteTask = (state: StateType, action): StateType => ({
   ...state,
   todos: state.todos.map((todo) => (todo.id === action.payload.todoId ? {
     ...todo,
@@ -74,7 +82,7 @@ const deleteTask = (state: StateType, action: ActionsType): StateType => ({
     ...todo,
   })),
 });
-const changeTaskStatus = (state: StateType, action: ActionsType): StateType => ({
+const changeTaskStatus = (state: StateType, action): StateType => ({
   ...state,
   todos: state.todos.map((todo) => (todo.id === action.payload.todoId ? {
     ...todo,

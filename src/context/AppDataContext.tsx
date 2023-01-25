@@ -1,8 +1,9 @@
 import {
   createContext, useCallback, useContext, useReducer,
 } from 'react';
-import { Actions, ActionsType, StateType } from './reducer/reducer.types';
+import { StateType } from './reducer/reducer.types';
 import { appReducer, initState } from './reducer/reducer';
+import { Actions, ActionsType } from './reducer/action.types';
 
 const useAppDataContext = (init: StateType) => {
   const [state, dispatch] = useReducer<(state: StateType, actions: ActionsType)
@@ -24,8 +25,18 @@ const useAppDataContext = (init: StateType) => {
     dispatch({ type: Actions.DELETE_TASK_LIST, payload: { todoId, taskListId } });
   }, []);
 
-  const addTask = useCallback((todoId: string, taskListId: string, title: string) => {
-    dispatch({ type: Actions.ADD_TASK, payload: { todoId, taskListId, title } });
+  const addTask = useCallback((
+    todoId: string,
+    taskListId: string,
+    title: string,
+    description: string,
+  ) => {
+    dispatch({
+      type: Actions.ADD_TASK,
+      payload: {
+        todoId, taskListId, title, description,
+      },
+    });
   }, []);
 
   const deleteTask = useCallback((todoId: string, taskListId: string, taskId: string) => {
@@ -47,7 +58,7 @@ const initialStateContext = {
   deleteTodo: (id: string) => { },
   addTaskList: (todoId: string, title: string) => { },
   deleteTaskList: (todoId: string, taskListId: string) => { },
-  addTask: (todoId: string, taskListId: string, title: string) => { },
+  addTask: (todoId: string, taskListId: string, title: string, description: string) => { },
   deleteTask: (todoId: string, taskListId: string, taskId: string) => { },
   changeTaskStatus: (todoId: string, taskListId: string, taskId: string) => { },
 };
@@ -63,9 +74,9 @@ export const useTodo = () => {
   };
 };
 
-export const useTaskList = (id: string) => {
+export const useTaskList = (todoId: string) => {
   const { state: { todos }, deleteTaskList, addTask } = useContext(AppDataContext);
-  const { tasksList } = todos.find((el) => el.id === id);
+  const { tasksList } = todos.find((el) => el.id === todoId);
   return { tasksList, deleteTaskList, addTask };
 };
 
