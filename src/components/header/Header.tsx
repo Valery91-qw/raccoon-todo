@@ -2,7 +2,9 @@ import {
   AppBar, ButtonBase, IconButton, TextField, Toolbar,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { ChangeEvent, useState } from 'react';
+import React, {
+  ChangeEvent, useState,
+} from 'react';
 import { useTodo } from '../../context/appDataContext/AppDataContext';
 
 export default function Header() {
@@ -14,17 +16,21 @@ export default function Header() {
     setValue(e.currentTarget.value);
   };
 
-  const handleClick = () => {
+  const handleAddTodo = (
+    e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (!value) return;
-    addTodo(value);
-    setValue('');
+    if (e.key === 'Enter' || e.currentTarget.type === 'button') {
+      addTodo(value);
+      setValue('');
+    }
   };
 
   return (
     <AppBar>
       <Toolbar>
-        <TextField label="Todo title" onChange={handleChange} value={value} required={!value} />
-        <IconButton onClick={handleClick} disabled={!value}>
+        <TextField label="Todo title" onChange={handleChange} onKeyDown={(e) => handleAddTodo(e)} value={value} required={!value} />
+        <IconButton onClick={(e) => handleAddTodo(e)} disabled={!value}>
           <AddIcon fontSize="large" />
         </IconButton>
       </Toolbar>
