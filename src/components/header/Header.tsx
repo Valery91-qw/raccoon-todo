@@ -1,9 +1,9 @@
 import {
-  AppBar, ButtonBase, TextField, Toolbar,
+  AppBar, ButtonBase, IconButton, TextField, Toolbar,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { ChangeEvent, useState } from 'react';
-import { useTodo } from '../../context/AppDataContext';
+import { useTodo } from '../../context/appDataContext/AppDataContext';
 
 export default function Header() {
   const { addTodo } = useTodo();
@@ -23,10 +23,10 @@ export default function Header() {
   return (
     <AppBar>
       <Toolbar>
-        <TextField label="Todo name" onChange={handleChange} value={value} required />
-        <ButtonBase onClick={handleClick} disabled={!value}>
+        <TextField label="Todo title" onChange={handleChange} value={value} required={!value} />
+        <IconButton onClick={handleClick} disabled={!value}>
           <AddIcon fontSize="large" />
-        </ButtonBase>
+        </IconButton>
       </Toolbar>
     </AppBar>
   );

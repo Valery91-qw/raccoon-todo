@@ -3,7 +3,7 @@ import {
   Box, ButtonBase, TextField,
 } from '@mui/material';
 import { Add } from '@mui/icons-material';
-import { useTaskList } from '../../../context/AppDataContext';
+import { useTaskList } from '../../../context/appDataContext/AppDataContext';
 
 type InputTaskParamsTypes = {
   todoId: string
@@ -17,8 +17,8 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: 'primary.main',
+  border: '2px solid #fff',
   boxShadow: 24,
   p: 4,
 };
@@ -46,7 +46,6 @@ export default function InputTaskParams({ todoId, taskListId } : InputTaskParams
     <Box sx={style}>
       <TextField
         placeholder="Task title"
-        required
         value={taskTitle}
         onChange={changeTitleHandler}
       />

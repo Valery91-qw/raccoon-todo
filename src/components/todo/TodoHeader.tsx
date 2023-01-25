@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import React, { useState } from 'react';
-import { useTodo } from '../../context/AppDataContext';
+import { useTodo } from '../../context/appDataContext/AppDataContext';
 
 interface ITodoHeader {
   id: string,

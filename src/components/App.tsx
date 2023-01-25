@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import Header from './header/Header';
 import Todo from './todo/Todo';
-import { useTodo } from '../context/AppDataContext';
+import { useTodo } from '../context/appDataContext/AppDataContext';
 import gridStyles from './App.styles';
 
 function App() {
