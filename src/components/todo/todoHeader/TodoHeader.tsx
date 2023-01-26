@@ -1,18 +1,15 @@
 import {
-  ButtonBase, CardContent, Typography,
+  CardContent, IconButton, Typography,
 } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TodoHeaderMenu from './todoHeaderMenu/TodoHeaderMenu';
-
-type TodoHeaderType = {
-  todoId: string,
-  title: string
-};
+import todoHeaderStyles from './todoHeader.styles';
+import { TodoHeaderOpenHandler, TodoHeaderStateType, TodoHeaderType } from './todoHeader.types';
 
 export default function TodoHeader({ todoId, title } : TodoHeaderType) {
-  const [element, seElement] = useState<undefined | null | HTMLElement>(null);
-  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const [element, seElement] = useState<TodoHeaderStateType>(null);
+  const handleOpen = (e: TodoHeaderOpenHandler) => {
     seElement(e.currentTarget);
   };
 
@@ -22,17 +19,13 @@ export default function TodoHeader({ todoId, title } : TodoHeaderType) {
 
   return (
     <>
-      <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography fontSize={{
-          sm: '1.5rem',
-          xs: '1rem',
-        }}
-        >
+      <CardContent sx={todoHeaderStyles.cardContent.sx}>
+        <Typography fontSize={todoHeaderStyles.typography.fontSize}>
           {title}
         </Typography>
-        <ButtonBase onClick={handleOpen}>
+        <IconButton onClick={handleOpen}>
           <SettingsIcon />
-        </ButtonBase>
+        </IconButton>
       </CardContent>
       <TodoHeaderMenu element={element} todoId={todoId} handleClose={handleClose} />
     </>

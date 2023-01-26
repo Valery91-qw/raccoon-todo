@@ -12,9 +12,6 @@ const theme = createTheme({
   //  --Components--
   components: {
     MuiSwitch: {
-      defaultProps: {
-
-      },
       styleOverrides: {
         switchBase: {
           color: '#0288d1',
