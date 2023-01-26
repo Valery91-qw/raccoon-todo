@@ -6,11 +6,9 @@ import { AppDataProvider } from './context/appDataContext/AppDataContext';
 import AppStylesContextProvider from './context/appStylesContext/AppStylesContext';
 import AppQueryContextProvider from './context/AppQueryContextProvider';
 
-const queryClient = new QueryClient();
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <AppDataProvider>
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={new QueryClient()}>
       <AppQueryContextProvider>
         <AppStylesContextProvider>
           <App />

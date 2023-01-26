@@ -10,14 +10,14 @@ import { useTodo } from '../../context/appDataContext/AppDataContext';
 export default function Header() {
   const { addTodo } = useTodo();
 
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
   };
 
   const handleAddTodo = (
-    e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>,
+    e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLDivElement>,
   ) => {
     if (!value) return;
     if (e.key === 'Enter' || e.currentTarget.type === 'button') {

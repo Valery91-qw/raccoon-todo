@@ -5,10 +5,10 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { Add } from '@mui/icons-material';
-import TaskListHeader from './TaskListHeader';
+import TaskListHeader from './taskListHeader/TaskListHeader';
 import Task from './task/Task';
 import { useTask } from '../../../context/appDataContext/AppDataContext';
-import InputTaskParams from './InputTaskParams';
+import InputTaskParams from './inputTaskParams/InputTaskParams';
 
 type TaskListType = {
   todoId: string

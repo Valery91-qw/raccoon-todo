@@ -1,29 +1,13 @@
-import React, {
-  ChangeEvent, forwardRef, ReactElement, useState,
+import {
+  forwardRef, ReactElement, useState,
 } from 'react';
 import {
-  Box, ButtonBase, TextField,
+  Box, IconButton, TextField,
 } from '@mui/material';
 import { Add } from '@mui/icons-material';
-import { useTaskList } from '../../../context/appDataContext/AppDataContext';
-
-type InputTaskParamsTypes = {
-  todoId: string
-  taskListId: string
-
-};
-
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'primary.main',
-  border: '2px solid #fff',
-  boxShadow: 24,
-  p: 4,
-};
+import { useTaskList } from '../../../../context/appDataContext/AppDataContext';
+import inputTaskParamsStyles from './InputTaskParams.styles';
+import { ChangeEventHandlerType, InputTaskParamsTypes } from './InputTaskParams.types';
 
 const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
   ({ todoId, taskListId }, ref) => {
@@ -31,11 +15,11 @@ const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
     const [taskDescription, setTaskDescription] = useState('');
     const { addTask } = useTaskList(todoId);
 
-    const changeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeTitleHandler = (e: ChangeEventHandlerType) => {
       setTaskTitle(e.currentTarget.value);
     };
 
-    const changeDescriptionHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeDescriptionHandler = (e: ChangeEventHandlerType) => {
       setTaskDescription(e.currentTarget.value);
     };
     const clickHandler = () => {
@@ -46,7 +30,11 @@ const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
     };
 
     return (
-      <Box sx={style} ref={ref} tabIndex={-1}>
+      <Box
+        sx={inputTaskParamsStyles.box.style}
+        ref={ref}
+        tabIndex={inputTaskParamsStyles.box.tabIndex}
+      >
         <TextField
           placeholder="Task title"
           value={taskTitle}
@@ -55,13 +43,13 @@ const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
         <TextField
           multiline
           placeholder="Task description"
-          rows={4}
+          rows={inputTaskParamsStyles.multilineTextField.rows}
           value={taskDescription}
           onChange={changeDescriptionHandler}
         />
-        <ButtonBase onClick={clickHandler} sx={{ display: 'block' }}>
+        <IconButton onClick={clickHandler} sx={inputTaskParamsStyles.iconButton}>
           <Add />
-        </ButtonBase>
+        </IconButton>
       </Box>
     );
   },

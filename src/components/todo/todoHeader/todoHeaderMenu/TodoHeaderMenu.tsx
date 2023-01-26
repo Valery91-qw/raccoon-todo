@@ -1,14 +1,13 @@
 import {
   FormControlLabel,
-  ListItemButton,
   ListItemIcon, ListItemText, Menu, MenuItem, Switch,
 } from '@mui/material';
 import React from 'react';
 import { Add, Delete } from '@mui/icons-material';
 import { useTodo } from '../../../../context/appDataContext/AppDataContext';
 import { useFetch } from '../../../../context/AppQueryContextProvider';
-import todoHeaderMenuStyles from './todoHeaderMenu.styles';
-import TodoHeaderMenuType from './todoHeaderMenu.types';
+import todoHeaderMenuStyles from './TodoHeaderMenu.styles';
+import TodoHeaderMenuType from './TodoHeaderMenu.types';
 
 export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHeaderMenuType) {
   const { deleteTodo, addTaskList } = useTodo();

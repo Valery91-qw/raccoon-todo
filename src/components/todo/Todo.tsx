@@ -5,13 +5,9 @@ import TodoHeader from './todoHeader/TodoHeader';
 import { useTaskList } from '../../context/appDataContext/AppDataContext';
 import TaskList from './taskList/TaskList';
 import gridStyles from './Todo.styles';
+import TodoType from './Todo.types';
 
-interface ITodo {
-  todoId: string
-  title: string
-}
-
-export default function Todo({ todoId, title }: ITodo) {
+export default function Todo({ todoId, title }: TodoType) {
   const { tasksList } = useTaskList(todoId);
 
   return (

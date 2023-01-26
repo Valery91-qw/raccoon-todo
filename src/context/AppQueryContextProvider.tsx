@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import {
   ChangeEvent,
-  createContext, useCallback, useContext, useMemo, useState,
+  createContext, useCallback, useContext, useState,
 } from 'react';
 
 const initialContext: {
@@ -26,6 +26,7 @@ export default function AppQueryContextProvider({ children }: typeof children) {
     refetchOnWindowFocus: false,
     enabled: false,
   });
+
   const handleClick = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       const { data } = await refetch();
@@ -49,6 +50,7 @@ type ArticleType = {
     name: string
   }
   author: string,
+  title: string,
   description: string
   url: string,
   urlToImage: string
