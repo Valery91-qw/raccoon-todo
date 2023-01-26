@@ -1,5 +1,5 @@
 import {
-  ButtonBase, Checkbox, ListItemText, Typography,
+  Checkbox, IconButton, ListItemText, Typography,
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { Dispatch, SetStateAction } from 'react';
@@ -23,9 +23,9 @@ export default function TaskListHeader({
       <Typography>
         {title}
       </Typography>
-      <ButtonBase onClick={() => deleteTaskList(todoId, id)}>
+      <IconButton onClick={() => deleteTaskList(todoId, id)}>
         <Delete />
-      </ButtonBase>
+      </IconButton>
     </ListItemText>
   );
 }

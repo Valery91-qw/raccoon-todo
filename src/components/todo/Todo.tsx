@@ -1,18 +1,18 @@
 import {
   Card, Grid,
 } from '@mui/material';
-import TodoHeader from './TodoHeader';
+import TodoHeader from './todoHeader/TodoHeader';
 import { useTaskList } from '../../context/appDataContext/AppDataContext';
 import TaskList from './taskList/TaskList';
 import gridStyles from './Todo.styles';
 
 interface ITodo {
-  id: string
+  todoId: string
   title: string
 }
 
-export default function Todo({ id, title }: ITodo) {
-  const { tasksList } = useTaskList(id);
+export default function Todo({ todoId, title }: ITodo) {
+  const { tasksList } = useTaskList(todoId);
 
   return (
     <Grid
@@ -23,14 +23,14 @@ export default function Todo({ id, title }: ITodo) {
       textAlign={gridStyles.textAlign}
     >
       <Card>
-        <TodoHeader id={id} title={title} />
+        <TodoHeader todoId={todoId} title={title} />
         {
               tasksList.map(
                 (taskList) => (
                   <TaskList
                     key={taskList.id}
                     taskListId={taskList.id}
-                    todoId={id}
+                    todoId={todoId}
                     title={taskList.title}
                   />
                 ),

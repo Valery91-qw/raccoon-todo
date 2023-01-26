@@ -18,7 +18,7 @@ function App() {
       >
         {
             todos.map(
-              (el) => <Todo key={el.id} id={el.id} title={el.todoTitle} />,
+              (el) => <Todo key={el.id} todoId={el.id} title={el.todoTitle} />,
             )
           }
       </Grid>

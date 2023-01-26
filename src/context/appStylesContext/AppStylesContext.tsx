@@ -11,6 +11,38 @@ const theme = createTheme({
   ...paletteStyles,
   //  --Components--
   components: {
+    MuiSwitch: {
+      defaultProps: {
+
+      },
+      styleOverrides: {
+        switchBase: {
+          color: '#0288d1',
+        },
+        colorPrimary: {
+          '&.Mui-checked': {
+            color: '#2e7d32',
+          },
+        },
+        track: {
+          opacity: 0.2,
+          backgroundColor: '#0288d1',
+          '.Mui-checked.Mui-checked + &': {
+            opacity: 0.7,
+            backgroundColor: '#2e7d32',
+          },
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          '&.Mui-checked': {
+            color: '#ffffff',
+          },
+        },
+      },
+    },
     MuiAppBar: {
       defaultProps: {
         position: 'sticky',

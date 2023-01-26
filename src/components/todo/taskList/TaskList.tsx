@@ -1,6 +1,6 @@
 import {
-  Box, ButtonBase,
-  Collapse,
+  Box,
+  Collapse, IconButton,
   List, Modal,
 } from '@mui/material';
 import { useState } from 'react';
@@ -32,9 +32,9 @@ export default function TaskList(
       >
         <Collapse in={open} unmountOnExit>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <ButtonBase onClick={() => setOpenModal((prevState) => !prevState)}>
+            <IconButton onClick={() => setOpenModal((prevState) => !prevState)}>
               <Add />
-            </ButtonBase>
+            </IconButton>
           </Box>
           {
           tasks.map((el) => (

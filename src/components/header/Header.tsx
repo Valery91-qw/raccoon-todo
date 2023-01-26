@@ -1,5 +1,5 @@
 import {
-  AppBar, ButtonBase, IconButton, TextField, Toolbar,
+  AppBar, IconButton, TextField, Toolbar,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import React, {
@@ -29,7 +29,13 @@ export default function Header() {
   return (
     <AppBar>
       <Toolbar>
-        <TextField label="Todo title" onChange={handleChange} onKeyDown={(e) => handleAddTodo(e)} value={value} required={!value} />
+        <TextField
+          label="Todo title"
+          onChange={handleChange}
+          onKeyDown={(e) => handleAddTodo(e)}
+          value={value}
+          required={!value}
+        />
         <IconButton onClick={(e) => handleAddTodo(e)} disabled={!value}>
           <AddIcon fontSize="large" />
         </IconButton>

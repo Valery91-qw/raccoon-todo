@@ -1,4 +1,6 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, {
+  ChangeEvent, forwardRef, ReactElement, useState,
+} from 'react';
 import {
   Box, ButtonBase, TextField,
 } from '@mui/material';
@@ -23,42 +25,46 @@ const style = {
   p: 4,
 };
 
-export default function InputTaskParams({ todoId, taskListId } : InputTaskParamsTypes) {
-  const [taskTitle, setTaskTitle] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
-  const { addTask } = useTaskList(todoId);
+const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
+  ({ todoId, taskListId }, ref) => {
+    const [taskTitle, setTaskTitle] = useState('');
+    const [taskDescription, setTaskDescription] = useState('');
+    const { addTask } = useTaskList(todoId);
 
-  const changeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTaskTitle(e.currentTarget.value);
-  };
+    const changeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      setTaskTitle(e.currentTarget.value);
+    };
 
-  const changeDescriptionHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTaskDescription(e.currentTarget.value);
-  };
-  const clickHandler = () => {
-    if (!taskTitle || !taskDescription) return;
-    addTask(todoId, taskListId, taskTitle.trim(), taskDescription.trim());
-    setTaskTitle('');
-    setTaskDescription('');
-  };
+    const changeDescriptionHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      setTaskDescription(e.currentTarget.value);
+    };
+    const clickHandler = () => {
+      if (!taskTitle || !taskDescription) return;
+      addTask(todoId, taskListId, taskTitle.trim(), taskDescription.trim());
+      setTaskTitle('');
+      setTaskDescription('');
+    };
 
-  return (
-    <Box sx={style}>
-      <TextField
-        placeholder="Task title"
-        value={taskTitle}
-        onChange={changeTitleHandler}
-      />
-      <TextField
-        multiline
-        placeholder="Task description"
-        rows={4}
-        value={taskDescription}
-        onChange={changeDescriptionHandler}
-      />
-      <ButtonBase onClick={clickHandler} sx={{ display: 'block' }}>
-        <Add />
-      </ButtonBase>
-    </Box>
-  );
-}
+    return (
+      <Box sx={style} ref={ref} tabIndex={-1}>
+        <TextField
+          placeholder="Task title"
+          value={taskTitle}
+          onChange={changeTitleHandler}
+        />
+        <TextField
+          multiline
+          placeholder="Task description"
+          rows={4}
+          value={taskDescription}
+          onChange={changeDescriptionHandler}
+        />
+        <ButtonBase onClick={clickHandler} sx={{ display: 'block' }}>
+          <Add />
+        </ButtonBase>
+      </Box>
+    );
+  },
+);
+
+export default InputTaskParams;
