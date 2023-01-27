@@ -1,5 +1,5 @@
 import { Snackbar } from '@mui/material';
-import { useFetch } from '../../context/AppQueryContextProvider';
+import { useFetch } from '../../context/appQueryContext/AppQueryContextProvider';
 import './styles.css';
 
 export default function NewsLine() {
