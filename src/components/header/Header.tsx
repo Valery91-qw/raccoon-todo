@@ -1,23 +1,27 @@
 import {
-  AppBar, IconButton, TextField, Toolbar,
+  AppBar, IconButton, LinearProgress, TextField, Toolbar,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import React, {
-  ChangeEvent, useState,
+import {
+  useState,
 } from 'react';
 import { useTodo } from '../../context/appDataContext/AppDataContext';
+import { useFetch } from '../../context/appQueryContext/AppQueryContextProvider';
+import headerStyles from './Header.styles';
+import { EventHandlerAddTodoType, HandleChangeType } from './Header.types';
 
 export default function Header() {
   const { addTodo } = useTodo();
+  const { isLoading, isRefetching } = useFetch();
 
   const [value, setValue] = useState('');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: HandleChangeType) => {
     setValue(e.currentTarget.value);
   };
 
   const handleAddTodo = (
-    e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLDivElement>,
+    e: EventHandlerAddTodoType,
   ) => {
     if (!value) return;
     if (e.key === 'Enter' || e.currentTarget.type === 'button') {
@@ -40,6 +44,7 @@ export default function Header() {
           <AddIcon fontSize="large" />
         </IconButton>
       </Toolbar>
+      {(isLoading || isRefetching) && <LinearProgress sx={headerStyles.linerProgress.sx} />}
     </AppBar>
   );
 }

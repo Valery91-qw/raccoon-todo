@@ -7,8 +7,7 @@ import { fetchNews, randomArrayItem } from './AppQueryContext.utils';
 import { InitialContextType, NewsStateType } from './AppQueryContext.types';
 
 const initialContext: InitialContextType = {
-  news: undefined,
-  handleClick: (e: ChangeEvent<HTMLInputElement>) => {},
+  showNews: (isShow: boolean) => {},
 };
 
 const AppQueryContext = createContext(initialContext);
@@ -17,13 +16,13 @@ export const useFetch = () => useContext(AppQueryContext);
 export default function AppQueryContextProvider({ children }: typeof children) {
   const [news, setNews] = useState<NewsStateType>();
 
-  const { refetch } = useQuery('fetchNews', fetchNews, {
+  const { refetch, isLoading, isRefetching } = useQuery('fetchNews', fetchNews, {
     refetchOnWindowFocus: false,
     enabled: false,
   });
 
-  const handleClick = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
+  const showNews = useCallback(async (isShow: boolean) => {
+    if (isShow) {
       const { data } = await refetch();
       const article = data.articles[randomArrayItem(data.articles.length)];
       setNews(article);
@@ -33,7 +32,10 @@ export default function AppQueryContextProvider({ children }: typeof children) {
   }, [refetch]);
 
   return (
-    <AppQueryContext.Provider value={{ handleClick, news }}>
+    <AppQueryContext.Provider value={{
+      showNews, news, isLoading, isRefetching,
+    }}
+    >
       {children}
     </AppQueryContext.Provider>
   );

@@ -17,8 +17,10 @@ type ArticleType = {
 type NewsStateType = ArticleType | undefined
 
 type InitialContextType = {
-    news: NewsStateType
-    handleClick: (e: ChangeEvent<HTMLInputElement>) => void
+    isRefetching?: boolean
+    isLoading?: boolean
+    news?: NewsStateType
+    showNews: (isShow: boolean) => void
 }
 
 export {
