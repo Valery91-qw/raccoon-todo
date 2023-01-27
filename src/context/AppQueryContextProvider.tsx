@@ -16,7 +16,12 @@ const AppQueryContext = createContext(initialContext);
 export const useFetch = () => useContext(AppQueryContext);
 
 const fetchNews = async () => {
-  const res = await fetch(`https://newsapi.org/v2/top-headlines?country=ru&apiKey=${import.meta.env.VITE_API_KEY}`);
+  // const res = await fetch(`https://newsapi.org/v2/top-headlines?country=ru&apiKey=${import.meta.env.VITE_API_KEY}`); // local development
+  const res = await fetch('https://api.newscatcherapi.com/v2/latest_headlines?countries=RU&page_size=10', {
+    headers: {
+      'x-api-key': `${import.meta.env.VITE_API_KEY}`,
+    },
+  });
   return res.json();
 };
 
