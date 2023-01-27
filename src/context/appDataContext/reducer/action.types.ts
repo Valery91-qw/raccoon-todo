@@ -22,7 +22,7 @@ type AddTaskList = {
   type: Actions.ADD_TASK_LIST
   payload: {
     todoId: string,
-    title: string
+    date: Date
   }
 };
 

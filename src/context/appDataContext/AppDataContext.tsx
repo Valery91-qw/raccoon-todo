@@ -17,8 +17,8 @@ const useAppDataContext = (init: StateType) => {
     dispatch({ type: Actions.DELETE_TODO, payload: id });
   }, []);
 
-  const addTaskList = useCallback((todoId: string, title: string) => {
-    dispatch({ type: Actions.ADD_TASK_LIST, payload: { todoId, title } });
+  const addTaskList = useCallback((todoId: string, date: Date) => {
+    dispatch({ type: Actions.ADD_TASK_LIST, payload: { todoId, date } });
   }, []);
 
   const deleteTaskList = useCallback((todoId: string, taskListId: string) => {
@@ -56,7 +56,7 @@ const initialStateContext = {
   state: initState,
   addTodo: (title: string) => { },
   deleteTodo: (id: string) => { },
-  addTaskList: (todoId: string, title: string) => { },
+  addTaskList: (todoId: string, date: Date) => { },
   deleteTaskList: (todoId: string, taskListId: string) => { },
   addTask: (todoId: string, taskListId: string, title: string, description: string) => { },
   deleteTask: (todoId: string, taskListId: string, taskId: string) => { },

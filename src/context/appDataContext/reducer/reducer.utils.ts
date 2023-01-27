@@ -10,20 +10,31 @@ const deleteTodo = (state: StateType, action): StateType => ({
   ...state, todos: state.todos.filter((todo) => todo.id !== action.payload),
 });
 
-const addTaskList = (state: StateType, action): StateType => ({
-  ...state,
-  todos: state.todos.map(
-    (todo) => (todo.id === action.payload.todoId
-      ? {
-        ...todo,
-        tasksList: [
-          { id: uuid(), title: action.payload.title, tasks: [] },
-          ...todo.tasksList,
-        ],
-      }
-      : { ...todo }),
-  ),
-});
+function serializeDate(date: Date) {
+  const createDate = date.toLocaleString('en-GB', {
+    day: 'numeric',
+    month: '2-digit',
+  });
+  return `Tasklist ( ${createDate} )`;
+}
+
+const addTaskList = (state: StateType, action): StateType => {
+  const title = serializeDate(action.payload.date);
+  return {
+    ...state,
+    todos: state.todos.map(
+      (todo) => (todo.id === action.payload.todoId
+        ? {
+          ...todo,
+          tasksList: [
+            { id: uuid(), title, tasks: [] },
+            ...todo.tasksList,
+          ],
+        }
+        : { ...todo }),
+    ),
+  };
+};
 
 const deleteTaskList = (state: StateType, action): StateType => ({
   ...state,

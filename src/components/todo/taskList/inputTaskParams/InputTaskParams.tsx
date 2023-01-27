@@ -36,11 +36,13 @@ const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
         tabIndex={inputTaskParamsStyles.box.tabIndex}
       >
         <TextField
+          required={!taskTitle}
           placeholder="Task title"
           value={taskTitle}
           onChange={changeTitleHandler}
         />
         <TextField
+          required={!taskDescription}
           multiline
           placeholder="Task description"
           rows={inputTaskParamsStyles.multilineTextField.rows}

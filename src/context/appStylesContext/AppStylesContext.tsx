@@ -2,10 +2,17 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import paletteStyles from './palette.styles';
 
-const theme = createTheme({
-  ...paletteStyles,
-  //  --Components--
+const theme = createTheme(paletteStyles, {
   components: {
+    MuiCollapse: {
+      styleOverrides: {
+        root: {
+          margin: '0 10px',
+          boxShadow: '0 0 20px #121212',
+          borderRadius: '20px',
+        },
+      },
+    },
     MuiSwitch: {
       styleOverrides: {
         switchBase: {

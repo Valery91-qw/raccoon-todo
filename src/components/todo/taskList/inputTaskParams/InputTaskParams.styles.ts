@@ -1,6 +1,9 @@
 const inputTaskParamsStyles = {
   box: {
     style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       position: 'absolute' as const,
       top: '50%',
       left: '50%',
@@ -15,6 +18,7 @@ const inputTaskParamsStyles = {
   },
   iconButton: {
     display: 'block',
+    marginTop: '10px',
   },
   multilineTextField: {
     rows: 4,

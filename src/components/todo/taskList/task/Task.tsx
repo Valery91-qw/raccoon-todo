@@ -3,15 +3,8 @@ import {
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { useTask } from '../../../../context/appDataContext/AppDataContext';
-
-type TaskType = {
-  todoId: string
-  taskListId: string
-  taskId: string
-  title: string
-  description: string
-  isDone: boolean
-};
+import TaskType from './Task.types';
+import taskStyles from './Task.styles';
 
 export default function Task({
   todoId, taskListId, taskId, title, description, isDone,
@@ -19,14 +12,16 @@ export default function Task({
   const { deleteTask, changeTaskStatus } = useTask(todoId, taskListId);
 
   return (
-    <List sx={{ display: 'flex', px: '10px' }}>
+    <List sx={taskStyles.list.sx}>
       <ButtonBase onClick={() => deleteTask(todoId, taskListId, taskId)}>
         <Delete />
       </ButtonBase>
-      <ListItemText sx={{ marginLeft: '15px', textAlign: 'left' }}>
-        <Typography variant="h6">
-          {!isDone ? title : <del>{title}</del>}
-        </Typography>
+      <ListItemText sx={taskStyles.listItemText.sx}>
+        <Tooltip title={title}>
+          <Typography variant="h6" noWrap>
+            {!isDone ? title : <del>{title}</del>}
+          </Typography>
+        </Tooltip>
         <Tooltip title={description}>
           <Typography noWrap>
             {description}

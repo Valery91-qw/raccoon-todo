@@ -19,6 +19,8 @@ const fetchNews = async () => {
   const res = await fetch(`https://newsapi.org/v2/top-headlines?country=ru&apiKey=${import.meta.env.VITE_API_KEY}`);
   return res.json();
 };
+
+const randomNews = (length: number): number => Math.floor(Math.random() * length);
 export default function AppQueryContextProvider({ children }: typeof children) {
   const [news, setNews] = useState<ArticleType | undefined>();
 
@@ -30,7 +32,7 @@ export default function AppQueryContextProvider({ children }: typeof children) {
   const handleClick = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       const { data } = await refetch();
-      const article = data.articles[Math.floor(Math.random() * data.articles.length)];
+      const article = data.articles[randomNews(data.articles.length)];
       setNews(article);
     } else {
       setNews(undefined);

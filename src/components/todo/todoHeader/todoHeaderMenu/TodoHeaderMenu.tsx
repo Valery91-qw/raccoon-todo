@@ -17,11 +17,6 @@ export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHea
 
   const isOpen = Boolean(element);
 
-  const createDate = () => {
-    const date = new Date();
-    return date.toLocaleString('en-GB', { day: 'numeric', month: '2-digit' });
-  };
-
   return (
     <Menu
       open={isOpen}
@@ -30,7 +25,7 @@ export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHea
       MenuListProps={todoHeaderMenuStyles.menuListProps}
       anchorOrigin={todoHeaderMenuStyles.anchorOrigin}
     >
-      <MenuItem onClick={() => addTaskList(todoId, createDate())}>
+      <MenuItem onClick={() => addTaskList(todoId, new Date())}>
         <ListItemIcon>
           <Add />
         </ListItemIcon>

@@ -9,12 +9,8 @@ import TaskListHeader from './taskListHeader/TaskListHeader';
 import Task from './task/Task';
 import { useTask } from '../../../context/appDataContext/AppDataContext';
 import InputTaskParams from './inputTaskParams/InputTaskParams';
-
-type TaskListType = {
-  todoId: string
-  taskListId: string
-  title: string
-};
+import TaskListType from './TaskList.types';
+import taskListStyles from './TaskList.styles';
 
 export default function TaskList(
   { todoId, taskListId, title } : TaskListType,
@@ -31,7 +27,7 @@ export default function TaskList(
       )}
       >
         <Collapse in={open} unmountOnExit>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={taskListStyles.box.sx}>
             <IconButton onClick={() => setOpenModal((prevState) => !prevState)}>
               <Add />
             </IconButton>
@@ -51,7 +47,11 @@ export default function TaskList(
         }
         </Collapse>
       </List>
-      <Modal open={openModal} onClose={() => setOpenModal((prevState) => !prevState)}>
+      <Modal
+        disableAutoFocus
+        open={openModal}
+        onClose={() => setOpenModal((prevState) => !prevState)}
+      >
         <InputTaskParams todoId={todoId} taskListId={taskListId} />
       </Modal>
     </>
