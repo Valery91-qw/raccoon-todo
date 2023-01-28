@@ -7,7 +7,6 @@ import {
 } from 'react';
 import { useTodo } from '../../context/appDataContext/AppDataContext';
 import { useFetch } from '../../context/appQueryContext/AppQueryContextProvider';
-import headerStyles from './Header.styles';
 import { EventHandlerAddTodoType, HandleChangeType } from './Header.types';
 
 export default function Header() {
@@ -20,9 +19,7 @@ export default function Header() {
     setValue(e.currentTarget.value);
   };
 
-  const handleAddTodo = (
-    e: EventHandlerAddTodoType,
-  ) => {
+  const handleAddTodo = (e: EventHandlerAddTodoType) => {
     if (!value) return;
     if (e.key === 'Enter' || e.currentTarget.type === 'button') {
       addTodo(value);
@@ -44,7 +41,7 @@ export default function Header() {
           <AddIcon fontSize="large" />
         </IconButton>
       </Toolbar>
-      {(isLoading || isRefetching) && <LinearProgress sx={headerStyles.linerProgress.sx} />}
+      {(isLoading || isRefetching) && <LinearProgress />}
     </AppBar>
   );
 }

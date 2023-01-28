@@ -1,6 +1,6 @@
 import { Snackbar } from '@mui/material';
 import { useFetch } from '../../context/appQueryContext/AppQueryContextProvider';
-import './styles.css';
+import { text } from './styles.module.css';
 
 export default function NewsLine() {
   const { news } = useFetch();
@@ -8,12 +8,8 @@ export default function NewsLine() {
   const isOpen = Boolean(news);
 
   return (
-    <Snackbar
-      sx={{ maxWidth: 300, overflow: 'hidden' }}
-      open={isOpen}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-    >
-      <span className="text">{news}</span>
+    <Snackbar open={isOpen}>
+      <span className={text}>{news}</span>
     </Snackbar>
   );
 }

@@ -3,7 +3,7 @@ import {
   createContext, useCallback, useContext, useMemo, useState,
 } from 'react';
 import { fetchNews, randomArrayItem } from './AppQueryContext.utils';
-import { InitialContextType, responseStateType } from './AppQueryContext.types';
+import { ArticleType, InitialContextType, responseStateType } from './AppQueryContext.types';
 
 const AppQueryContext = createContext<InitialContextType | null>(null);
 export const useFetch = () => useContext(AppQueryContext);
@@ -11,9 +11,7 @@ export const useFetch = () => useContext(AppQueryContext);
 export default function AppQueryContextProvider({ children }: typeof children) {
   const [news, setNews] = useState<responseStateType>();
 
-  const {
-    refetch, isLoading, isRefetching,
-  } = useQuery('fetchNews', fetchNews, {
+  const { refetch, isLoading, isRefetching } = useQuery('fetchNews', fetchNews, {
     refetchOnWindowFocus: false,
     enabled: false,
   });

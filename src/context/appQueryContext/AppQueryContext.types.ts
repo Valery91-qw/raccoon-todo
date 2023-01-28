@@ -1,5 +1,3 @@
-import {ChangeEvent} from "react";
-
 type ArticleType = {
     source: {
         id: string,
@@ -26,4 +24,5 @@ type InitialContextType = {
 export {
     responseStateType,
     InitialContextType,
+    ArticleType,
 }
