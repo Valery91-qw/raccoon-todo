@@ -13,7 +13,7 @@ export default function NewsLine() {
       open={isOpen}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >
-      <span className="text">{news?.title}</span>
+      <span className="text">{news}</span>
     </Snackbar>
   );
 }

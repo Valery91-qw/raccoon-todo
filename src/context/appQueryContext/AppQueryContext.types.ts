@@ -14,16 +14,16 @@ type ArticleType = {
     content: string
 };
 
-type NewsStateType = ArticleType | undefined
+type responseStateType = undefined | string
 
 type InitialContextType = {
     isRefetching?: boolean
     isLoading?: boolean
-    news?: NewsStateType
+    news?: responseStateType
     showNews: (isShow: boolean) => void
 }
 
 export {
-    NewsStateType,
+    responseStateType,
     InitialContextType,
 }

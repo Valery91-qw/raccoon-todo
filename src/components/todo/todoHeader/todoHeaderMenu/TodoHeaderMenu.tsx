@@ -10,7 +10,9 @@ import TodoHeaderMenuType from './TodoHeaderMenu.types';
 
 export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHeaderMenuType) {
   const { deleteTodo, addTaskList } = useTodo();
-  const { showNews, news } = useFetch();
+  const {
+    showNews, news, isLoading, isRefetching,
+  } = useFetch();
 
   const checked = Boolean(news);
 
@@ -38,7 +40,7 @@ export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHea
       </MenuItem>
       <MenuItem onChange={(e) => showNews(e.target.checked)}>
         <FormControlLabel
-          control={<Switch checked={checked} />}
+          control={<Switch disabled={isLoading || isRefetching} checked={checked} />}
           labelPlacement="start"
           label="Show news"
         />
