@@ -3,7 +3,7 @@ import Header from './header/Header';
 import Todo from './todo/Todo';
 import { useTodo } from '../context/appDataContext/AppDataContext';
 import gridStyles from './App.styles';
-import NewsLine from './newsLine/NewsLine';
+import NewsHeadline from './newsLine/NewsHeadline';
 
 function App() {
   const { todos } = useTodo();
@@ -22,7 +22,7 @@ function App() {
             )
           }
       </Grid>
-      <NewsLine />
+      <NewsHeadline />
     </>
   );
 }

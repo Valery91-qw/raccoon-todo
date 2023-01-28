@@ -11,10 +11,10 @@ import TodoHeaderMenuType from './TodoHeaderMenu.types';
 export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHeaderMenuType) {
   const { deleteTodo, addTaskList } = useTodo();
   const {
-    showNews, news, isLoading, isRefetching,
+    showNews, response, isLoading, isRefetching,
   } = useFetch();
 
-  const checked = Boolean(news);
+  const checked = Boolean(response);
 
   const isOpen = Boolean(element);
 

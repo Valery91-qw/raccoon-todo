@@ -1,13 +1,38 @@
 import { createTheme } from '@mui/material/styles';
+import { keyframes } from '@mui/material';
+
+const run = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+`;
 
 const componentsTheme = createTheme({
   components: {
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          animation: `${run} 20s linear infinite`,
+          backgroundColor: 'transparent',
+          color: '#ffffff',
+          fontSize: '1.2rem',
+        },
+        message: {
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+        },
+      },
+    },
     MuiSnackbar: {
       styleOverrides: {
         root: {
           maxWidth: 300,
           overflow: 'hidden',
           backgroundColor: '#333333',
+          borderRadius: '5px',
         },
       },
       defaultProps: {

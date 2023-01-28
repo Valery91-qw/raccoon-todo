@@ -15,10 +15,11 @@ type ArticleType = {
 type responseStateType = undefined | string
 
 type InitialContextType = {
-    isRefetching?: boolean
-    isLoading?: boolean
-    news?: responseStateType
-    showNews?: (isShow: boolean) => void
+    isRefetching: boolean
+    isLoading: boolean
+    response?: responseStateType
+    showNews: (isShow: boolean) => void
+    isError: boolean
 }
 
 export {
