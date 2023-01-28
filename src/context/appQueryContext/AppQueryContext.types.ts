@@ -20,7 +20,7 @@ type InitialContextType = {
     isRefetching?: boolean
     isLoading?: boolean
     news?: responseStateType
-    showNews: (isShow: boolean) => void
+    showNews?: (isShow: boolean) => void
 }
 
 export {

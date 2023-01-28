@@ -1,4 +1,4 @@
-export function createFetch(isDevMode: boolean): Promise<Response> {
+export function createFetch(isDevMode: boolean) {
   if (isDevMode) {
     return fetch('https://newsapi.org/v2/top-headlines?country=ru', {
       headers: {
@@ -13,7 +13,7 @@ export function createFetch(isDevMode: boolean): Promise<Response> {
   });
 }
 
-export function randomArrayItem(length: number): number {
+export function randomArrayItem(length: number) {
   return Math.floor(Math.random() * length);
 }
 

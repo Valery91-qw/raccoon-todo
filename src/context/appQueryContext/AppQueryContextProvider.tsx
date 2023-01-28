@@ -1,15 +1,11 @@
 import { useQuery } from 'react-query';
 import {
-  createContext, useCallback, useContext, useState,
+  createContext, useCallback, useContext, useMemo, useState,
 } from 'react';
 import { fetchNews, randomArrayItem } from './AppQueryContext.utils';
 import { InitialContextType, responseStateType } from './AppQueryContext.types';
 
-const initialContext: InitialContextType = {
-  showNews: (isShow: boolean) => {},
-};
-
-const AppQueryContext = createContext(initialContext);
+const AppQueryContext = createContext<InitialContextType | null>(null);
 export const useFetch = () => useContext(AppQueryContext);
 
 export default function AppQueryContextProvider({ children }: typeof children) {
@@ -36,11 +32,12 @@ export default function AppQueryContextProvider({ children }: typeof children) {
     setNews(title);
   }, [refetch]);
 
+  const context = useMemo(() => ({
+    showNews, news, isLoading, isRefetching,
+  }), [showNews, news, isLoading, isRefetching]);
+
   return (
-    <AppQueryContext.Provider value={{
-      showNews, news, isLoading, isRefetching,
-    }}
-    >
+    <AppQueryContext.Provider value={context}>
       {children}
     </AppQueryContext.Provider>
   );

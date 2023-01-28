@@ -25,6 +25,5 @@ module.exports = {
     rules: {
         "react/react-in-jsx-scope": "off",
         "react/display-name": "off",
-        "react/jsx-no-constructed-context-values": "off"
     }
 }
