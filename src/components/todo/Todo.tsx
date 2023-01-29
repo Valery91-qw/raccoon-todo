@@ -21,16 +21,16 @@ export default function Todo({ todoId, title }: TodoType) {
       <Card>
         <TodoHeader todoId={todoId} title={title} />
         {
-              tasksList.map(
-                (taskList) => (
-                  <TaskList
-                    key={taskList.id}
-                    taskListId={taskList.id}
-                    todoId={todoId}
-                    title={taskList.title}
-                  />
-                ),
-              )
+            tasksList.map(
+              (taskList) => (
+                <TaskList
+                  key={taskList.id}
+                  taskListId={taskList.id}
+                  todoId={todoId}
+                  title={taskList.title}
+                />
+              ),
+            )
           }
       </Card>
     </Grid>
