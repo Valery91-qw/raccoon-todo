@@ -37,20 +37,24 @@ const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
       >
         <TextField
           required={!taskTitle}
-          placeholder="Task title"
+          label="Task title"
           value={taskTitle}
           onChange={changeTitleHandler}
         />
         <TextField
           required={!taskDescription}
           multiline
-          placeholder="Task description"
+          label="Task description"
           rows={inputTaskParamsStyles.multilineTextField.rows}
           value={taskDescription}
           onChange={changeDescriptionHandler}
         />
-        <IconButton onClick={clickHandler} sx={inputTaskParamsStyles.iconButton}>
-          <Add />
+        <IconButton
+          disabled={!taskTitle || !taskDescription}
+          onClick={clickHandler}
+          sx={inputTaskParamsStyles.iconButton}
+        >
+          <Add fontSize="large" />
         </IconButton>
       </Box>
     );

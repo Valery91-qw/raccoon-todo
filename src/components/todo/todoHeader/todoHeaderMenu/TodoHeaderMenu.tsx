@@ -2,18 +2,19 @@ import {
   FormControlLabel,
   ListItemIcon, ListItemText, Menu, MenuItem, Switch,
 } from '@mui/material';
-import React from 'react';
 import { Add, Delete } from '@mui/icons-material';
 import { useTodo } from '../../../../context/appDataContext/AppDataContext';
-import { useFetch } from '../../../../context/AppQueryContextProvider';
+import { useFetch } from '../../../../context/appQueryContext/AppQueryContextProvider';
 import todoHeaderMenuStyles from './TodoHeaderMenu.styles';
 import TodoHeaderMenuType from './TodoHeaderMenu.types';
 
 export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHeaderMenuType) {
   const { deleteTodo, addTaskList } = useTodo();
-  const { handleClick, news } = useFetch();
+  const {
+    showNews, response, isLoading, isRefetching,
+  } = useFetch();
 
-  const checked = Boolean(news);
+  const checked = Boolean(response);
 
   const isOpen = Boolean(element);
 
@@ -37,9 +38,9 @@ export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHea
         </ListItemIcon>
         <ListItemText primary="Delete todo" />
       </MenuItem>
-      <MenuItem onChange={(e) => handleClick(e)}>
+      <MenuItem onChange={(e) => showNews(e.target.checked)}>
         <FormControlLabel
-          control={<Switch checked={checked} />}
+          control={<Switch disabled={isLoading || isRefetching} checked={checked} />}
           labelPlacement="start"
           label="Show news"
         />
