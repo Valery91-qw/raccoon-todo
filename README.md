@@ -10,5 +10,7 @@ The version of ```Node.js``` for this app is 18.12.1.
 
 If you want to start this project locally, you should download this repo.
 1. Type "npm install" into the terminal.
-2. Create a .env file in the root project folder with the "VITE_API_KEY" variable and add your [News Catcher API](https://newscatcherapi.com) API key to this variable.
+2. Create a .env file in the root project folder: 
+ -  with the "VITE_API_KEY_PROD"  variable and add your [News Catcher API](https://newscatcherapi.com) API key to this variable.
+ -  with the "VITE_API_KEY_DEV"  variable and add your [News API](https://newsapi.org) API key to this variable.
 3. Type ```npm run dev``` and explore the project.
