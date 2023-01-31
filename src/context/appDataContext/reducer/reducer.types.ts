@@ -8,7 +8,6 @@ type TaskType = {
 type TaskListType = {
   id: string
   title: string
-
   tasks: Array<TaskType>
 };
 

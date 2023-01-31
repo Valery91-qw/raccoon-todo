@@ -3,13 +3,15 @@ import {
   ListItemIcon, ListItemText, Menu, MenuItem, Switch,
 } from '@mui/material';
 import { Add, Delete } from '@mui/icons-material';
-import { useTodo } from '../../../../context/appDataContext/AppDataContext';
+import { useTaskList, useTodo } from '../../../../context/appDataContext/AppDataContext';
 import { useFetch } from '../../../../context/appQueryContext/AppQueryContextProvider';
 import todoHeaderMenuStyles from './TodoHeaderMenu.styles';
 import TodoHeaderMenuType from './TodoHeaderMenu.types';
 
 export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHeaderMenuType) {
-  const { deleteTodo, addTaskList } = useTodo();
+  const { deleteTodo } = useTodo();
+  const { addTaskList } = useTaskList(todoId);
+
   const {
     showNews, response, isLoading, isRefetching,
   } = useFetch();

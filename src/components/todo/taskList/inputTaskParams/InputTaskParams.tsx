@@ -5,7 +5,7 @@ import {
   Box, IconButton, TextField,
 } from '@mui/material';
 import { Add } from '@mui/icons-material';
-import { useTaskList } from '../../../../context/appDataContext/AppDataContext';
+import { useTask } from '../../../../context/appDataContext/AppDataContext';
 import inputTaskParamsStyles from './InputTaskParams.styles';
 import { ChangeEventHandlerType, InputTaskParamsTypes } from './InputTaskParams.types';
 
@@ -13,7 +13,7 @@ const InputTaskParams = forwardRef<ReactElement, InputTaskParamsTypes>(
   ({ todoId, taskListId }, ref) => {
     const [taskTitle, setTaskTitle] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
-    const { addTask } = useTaskList(todoId);
+    const { addTask } = useTask(todoId, taskListId);
 
     const changeTitleHandler = (e: ChangeEventHandlerType) => {
       setTaskTitle(e.currentTarget.value);
