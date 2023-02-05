@@ -2,13 +2,16 @@ import {
   Card, Grid,
 } from '@mui/material';
 import TodoHeader from './todoHeader/TodoHeader';
-import { useTaskList } from '../../context/appDataContext/AppDataContext';
 import TaskList from './taskList/TaskList';
 import gridStyles from './Todo.styles';
 import TodoType from './Todo.types';
+import useRootState from '../../store/store';
 
 export default function Todo({ todoId, title }: TodoType) {
-  const { tasksList } = useTaskList(todoId);
+  const tasksList = useRootState((state) => {
+    const curTodo = state.todos.find((todo) => todo.id === todoId);
+    return curTodo.tasksList;
+  });
 
   return (
     <Grid

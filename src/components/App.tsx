@@ -2,13 +2,13 @@ import { Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import Header from './header/Header';
 import Todo from './todo/Todo';
-import { useTodo } from '../context/appDataContext/AppDataContext';
 import gridStyles from './App.styles';
 import NewsHeadline from './newsLine/NewsHeadline';
 import { useFetch } from '../context/appQueryContext/AppQueryContextProvider';
+import useRootState from '../store/store';
 
 function App() {
-  const { todos } = useTodo();
+  const todos = useRootState((state) => state.todos);
   const { response, showNews } = useFetch();
 
   useEffect(() => {

@@ -7,17 +7,21 @@ import { useState } from 'react';
 import { Add } from '@mui/icons-material';
 import TaskListHeader from './taskListHeader/TaskListHeader';
 import Task from './task/Task';
-import { useTask } from '../../../context/appDataContext/AppDataContext';
 import InputTaskParams from './inputTaskParams/InputTaskParams';
 import TaskListType from './TaskList.types';
 import taskListStyles from './TaskList.styles';
+import useRootState from '../../../store/store';
 
 export default function TaskList(
   { todoId, taskListId, title } : TaskListType,
 ) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const { tasks } = useTask(todoId, taskListId);
+  const tasks = useRootState((state) => {
+    const curTodo = state.todos.find((todo) => todo.id === todoId);
+    const curTaskList = curTodo.tasksList.find((taskList) => taskList.id === taskListId);
+    return curTaskList.tasks;
+  });
 
   return (
     <>

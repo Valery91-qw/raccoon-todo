@@ -5,13 +5,13 @@ import AddIcon from '@mui/icons-material/Add';
 import {
   useState,
 } from 'react';
-import { useTodo } from '../../context/appDataContext/AppDataContext';
 import { useFetch } from '../../context/appQueryContext/AppQueryContextProvider';
 import { EventHandlerAddTodoType, HandleChangeType } from './Header.types';
+import useRootState from '../../store/store';
 
 export default function Header() {
-  const { addTodo } = useTodo();
   const { isLoading, isRefetching } = useFetch();
+  const addTodo = useRootState((state) => state.addTodo);
 
   const [value, setValue] = useState('');
 

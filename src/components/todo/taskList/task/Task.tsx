@@ -2,14 +2,15 @@ import {
   ButtonBase, List, ListItemText, Switch, Tooltip, Typography,
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { useTask } from '../../../../context/appDataContext/AppDataContext';
 import TaskType from './Task.types';
 import taskStyles from './Task.styles';
+import useRootState from '../../../../store/store';
 
 export default function Task({
   todoId, taskListId, taskId, title, description, isDone,
 }: TaskType) {
-  const { deleteTask, changeTaskStatus } = useTask(todoId, taskListId);
+  const deleteTask = useRootState((state) => state.deleteTask);
+  const changeTaskStatus = useRootState((state) => state.changeTaskStatus);
 
   return (
     <List sx={taskStyles.list.sx}>

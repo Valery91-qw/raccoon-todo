@@ -3,14 +3,16 @@ import {
   ListItemIcon, ListItemText, Menu, MenuItem, Switch,
 } from '@mui/material';
 import { Add, Delete } from '@mui/icons-material';
-import { useTaskList, useTodo } from '../../../../context/appDataContext/AppDataContext';
+// import { useTaskList, useTodo } from '../../../../context/appDataContext/AppDataContext';
 import { useFetch } from '../../../../context/appQueryContext/AppQueryContextProvider';
 import todoHeaderMenuStyles from './TodoHeaderMenu.styles';
 import TodoHeaderMenuType from './TodoHeaderMenu.types';
+import useRootState from '../../../../store/store';
 
 export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHeaderMenuType) {
-  const { deleteTodo } = useTodo();
-  const { addTaskList } = useTaskList(todoId);
+  // const { deleteTodo } = useTodo();
+  const deleteTodo = useRootState((state) => state.deleteTodo);
+  const addTaskList = useRootState((state) => state.addTaskList);
 
   const {
     showNews, response, isLoading, isRefetching,
