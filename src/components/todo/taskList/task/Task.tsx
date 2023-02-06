@@ -2,13 +2,14 @@ import {
   ButtonBase, List, ListItemText, Switch, Tooltip, Typography,
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { memo } from 'react';
 import TaskType from './Task.types';
 import taskStyles from './Task.styles';
 import useRootState from '../../../../store/store';
 
-export default function Task({
+const Task = memo(({
   todoId, taskListId, taskId, title, description, isDone,
-}: TaskType) {
+}: TaskType) => {
   const deleteTask = useRootState((state) => state.deleteTask);
   const changeTaskStatus = useRootState((state) => state.changeTaskStatus);
 
@@ -32,4 +33,6 @@ export default function Task({
       <Switch checked={isDone} onChange={() => changeTaskStatus(todoId, taskListId, taskId)} />
     </List>
   );
-}
+});
+
+export default Task;

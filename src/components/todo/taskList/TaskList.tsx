@@ -3,7 +3,7 @@ import {
   Collapse, IconButton,
   List, Modal,
 } from '@mui/material';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Add } from '@mui/icons-material';
 import TaskListHeader from './taskListHeader/TaskListHeader';
 import Task from './task/Task';
@@ -12,9 +12,9 @@ import TaskListType from './TaskList.types';
 import taskListStyles from './TaskList.styles';
 import useRootState from '../../../store/store';
 
-export default function TaskList(
+const TaskList = memo((
   { todoId, taskListId, title } : TaskListType,
-) {
+) => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const tasks = useRootState((state) => {
@@ -60,4 +60,6 @@ export default function TaskList(
       </Modal>
     </>
   );
-}
+});
+
+export default TaskList;

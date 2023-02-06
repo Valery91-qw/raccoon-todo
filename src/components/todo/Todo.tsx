@@ -1,14 +1,15 @@
 import {
   Card, Grid,
 } from '@mui/material';
+import { memo } from 'react';
 import TodoHeader from './todoHeader/TodoHeader';
 import TaskList from './taskList/TaskList';
 import gridStyles from './Todo.styles';
 import TodoType from './Todo.types';
 import useRootState from '../../store/store';
 
-export default function Todo({ todoId, title }: TodoType) {
-  const tasksList = useRootState((state) => {
+const Todo = memo(({ todoId, title }: TodoType) => {
+  const taskLists = useRootState((state) => {
     const curTodo = state.todos.find((todo) => todo.id === todoId);
     return curTodo.tasksList;
   });
@@ -24,7 +25,7 @@ export default function Todo({ todoId, title }: TodoType) {
       <Card>
         <TodoHeader todoId={todoId} title={title} />
         {
-            tasksList.map(
+            taskLists.map(
               (taskList) => (
                 <TaskList
                   key={taskList.id}
@@ -38,4 +39,6 @@ export default function Todo({ todoId, title }: TodoType) {
       </Card>
     </Grid>
   );
-}
+});
+
+export default Todo;
