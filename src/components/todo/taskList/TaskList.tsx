@@ -11,15 +11,12 @@ import InputTaskParams from './inputTaskParams/InputTaskParams';
 import TaskListType from './TaskList.types';
 import taskListStyles from './TaskList.styles';
 import useRootState from '../../../store/store';
+import { selectTasks } from '../../../store/store.selectors';
 
 function TaskList({ todoId, taskListId, title } : TaskListType) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const tasks = useRootState((state) => {
-    const curTodo = state.todos.find((todo) => todo.id === todoId);
-    const curTaskList = curTodo.tasksList.find((taskList) => taskList.id === taskListId);
-    return curTaskList.tasks;
-  });
+  const tasks = useRootState((state) => selectTasks(todoId, taskListId, state));
 
   return (
     <>
@@ -34,19 +31,17 @@ function TaskList({ todoId, taskListId, title } : TaskListType) {
               <Add />
             </IconButton>
           </Box>
-          {
-                        tasks.map((el) => (
-                          <Task
-                            key={el.id}
-                            todoId={todoId}
-                            taskListId={taskListId}
-                            taskId={el.id}
-                            title={el.title}
-                            description={el.description}
-                            isDone={el.isDone}
-                          />
-                        ))
-                    }
+          {tasks.map((el) => (
+            <Task
+              key={el.id}
+              todoId={todoId}
+              taskListId={taskListId}
+              taskId={el.id}
+              title={el.title}
+              description={el.description}
+              isDone={el.isDone}
+            />
+          ))}
         </Collapse>
       </List>
       <Modal

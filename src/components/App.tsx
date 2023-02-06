@@ -6,9 +6,10 @@ import gridStyles from './App.styles';
 import NewsHeadline from './newsLine/NewsHeadline';
 import { useFetch } from '../context/appQueryContext/AppQueryContextProvider';
 import useRootState from '../store/store';
+import { selectTodos } from '../store/store.selectors';
 
 function App() {
-  const todos = useRootState((state) => state.todos);
+  const todos = useRootState(selectTodos);
   const { response, showNews } = useFetch();
 
   useEffect(() => {

@@ -7,12 +7,10 @@ import TaskList from './taskList/TaskList';
 import gridStyles from './Todo.styles';
 import TodoType from './Todo.types';
 import useRootState from '../../store/store';
+import { selectTaskLists } from '../../store/store.selectors';
 
 function Todo({ todoId, title }: TodoType) {
-  const tasksList = useRootState((state) => {
-    const curTodo = state.todos.find((todo) => todo.id === todoId);
-    return curTodo.tasksList;
-  });
+  const taskLists = useRootState((state) => selectTaskLists(todoId, state));
 
   return (
     <Grid
@@ -25,7 +23,7 @@ function Todo({ todoId, title }: TodoType) {
       <Card>
         <TodoHeader todoId={todoId} title={title} />
         {
-            tasksList.map(
+            taskLists.map(
               (taskList) => (
                 <TaskList
                   key={taskList.id}
