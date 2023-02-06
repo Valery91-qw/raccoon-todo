@@ -7,9 +7,9 @@ import TaskType from './Task.types';
 import taskStyles from './Task.styles';
 import useRootState from '../../../../store/store';
 
-const Task = memo(({
+function Task({
   todoId, taskListId, taskId, title, description, isDone,
-}: TaskType) => {
+}: TaskType) {
   const deleteTask = useRootState((state) => state.deleteTask);
   const changeTaskStatus = useRootState((state) => state.changeTaskStatus);
 
@@ -33,6 +33,6 @@ const Task = memo(({
       <Switch checked={isDone} onChange={() => changeTaskStatus(todoId, taskListId, taskId)} />
     </List>
   );
-});
+}
 
-export default Task;
+export default memo(Task);

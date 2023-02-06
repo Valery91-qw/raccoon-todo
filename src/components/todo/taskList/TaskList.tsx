@@ -12,9 +12,7 @@ import TaskListType from './TaskList.types';
 import taskListStyles from './TaskList.styles';
 import useRootState from '../../../store/store';
 
-const TaskList = memo((
-  { todoId, taskListId, title } : TaskListType,
-) => {
+function TaskList({ todoId, taskListId, title } : TaskListType) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const tasks = useRootState((state) => {
@@ -28,7 +26,7 @@ const TaskList = memo((
       <List
         subheader={(
           <TaskListHeader todoId={todoId} id={taskListId} title={title} setOpen={setOpen} />
-      )}
+                )}
       >
         <Collapse in={open} unmountOnExit>
           <Box sx={taskListStyles.box.sx}>
@@ -37,18 +35,18 @@ const TaskList = memo((
             </IconButton>
           </Box>
           {
-          tasks.map((el) => (
-            <Task
-              key={el.id}
-              todoId={todoId}
-              taskListId={taskListId}
-              taskId={el.id}
-              title={el.title}
-              description={el.description}
-              isDone={el.isDone}
-            />
-          ))
-        }
+                        tasks.map((el) => (
+                          <Task
+                            key={el.id}
+                            todoId={todoId}
+                            taskListId={taskListId}
+                            taskId={el.id}
+                            title={el.title}
+                            description={el.description}
+                            isDone={el.isDone}
+                          />
+                        ))
+                    }
         </Collapse>
       </List>
       <Modal
@@ -60,6 +58,6 @@ const TaskList = memo((
       </Modal>
     </>
   );
-});
+}
 
-export default TaskList;
+export default memo(TaskList);

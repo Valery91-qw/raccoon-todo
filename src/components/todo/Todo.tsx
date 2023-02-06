@@ -8,8 +8,8 @@ import gridStyles from './Todo.styles';
 import TodoType from './Todo.types';
 import useRootState from '../../store/store';
 
-const Todo = memo(({ todoId, title }: TodoType) => {
-  const taskLists = useRootState((state) => {
+function Todo({ todoId, title }: TodoType) {
+  const tasksList = useRootState((state) => {
     const curTodo = state.todos.find((todo) => todo.id === todoId);
     return curTodo.tasksList;
   });
@@ -25,7 +25,7 @@ const Todo = memo(({ todoId, title }: TodoType) => {
       <Card>
         <TodoHeader todoId={todoId} title={title} />
         {
-            taskLists.map(
+            tasksList.map(
               (taskList) => (
                 <TaskList
                   key={taskList.id}
@@ -39,6 +39,6 @@ const Todo = memo(({ todoId, title }: TodoType) => {
       </Card>
     </Grid>
   );
-});
+}
 
-export default Todo;
+export default memo(Todo);
