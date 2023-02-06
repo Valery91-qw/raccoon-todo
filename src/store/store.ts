@@ -1,14 +1,13 @@
 import { create } from 'zustand';
-import { v4 as uuid } from 'uuid';
 import { immer } from 'zustand/middleware/immer';
 import { StateType } from './store.type';
-import serializeDate from './store.utils';
+import { createTask, createTaskList, createTodo } from './store.utils';
 
 const useRootState = create<StateType>(immer((set) => ({
   todos: [],
   addTodo: (title: string) => set(
     (state) => {
-      state.todos.push({ id: uuid(), todoTitle: title, tasksList: [] });
+      state.todos.push(createTodo(title));
     },
   ),
   deleteTodo: (id: string) => set(
@@ -17,11 +16,10 @@ const useRootState = create<StateType>(immer((set) => ({
       state.todos.splice(todoId, 1);
     },
   ),
-  addTaskList: (todoId: string, data: Date) => set(
+  addTaskList: (todoId: string, date: Date) => set(
     (state) => {
-      const title = serializeDate(data);
       const curTodo = state.todos.find((todo) => todo.id === todoId);
-      curTodo.tasksList.unshift({ id: uuid(), title, tasks: [] });
+      curTodo.tasksList.unshift(createTaskList(date));
     },
   ),
   deleteTaskList: (todoId: string, taskListId: string) => set(
@@ -35,9 +33,7 @@ const useRootState = create<StateType>(immer((set) => ({
     (state) => {
       const curTodo = state.todos.find((todo) => todo.id === todoId);
       const curTaskList = curTodo.tasksList.find((taskList) => taskList.id === taskListId);
-      curTaskList.tasks.unshift({
-        id: uuid(), title, description, isDone: false,
-      });
+      curTaskList.tasks.unshift(createTask(title, description));
     },
   ),
   deleteTask: (todoId: string, taskListId: string, taskId: string) => set(
