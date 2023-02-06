@@ -1,17 +1,17 @@
-type TaskType = {
+export type TaskType = {
     id: string,
     title: string
     description: string
     isDone: boolean
 };
 
-type TaskListType = {
+export type TaskListType = {
     id: string
     title: string
     tasks: Array<TaskType>
 };
 
-type TodoType = {
+export type TodoType = {
     id: string,
     todoTitle: string,
     tasksList: Array<TaskListType>

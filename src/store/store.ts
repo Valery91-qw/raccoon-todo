@@ -1,7 +1,9 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { StateType } from './store.type';
-import { createTask, createTaskList, createTodo } from './store.utils';
+import {
+  createTask, createTaskList, createTodo, findTask, findTaskList, findTodo,
+} from './store.utils';
 
 const useRootState = create<StateType>(immer((set) => ({
   todos: [],
@@ -18,38 +20,34 @@ const useRootState = create<StateType>(immer((set) => ({
   ),
   addTaskList: (todoId: string, date: Date) => set(
     (state) => {
-      const curTodo = state.todos.find((todo) => todo.id === todoId);
-      curTodo.tasksList.unshift(createTaskList(date));
+      const todo = findTodo<StateType>(todoId, state);
+      todo.tasksList.unshift(createTaskList(date));
     },
   ),
   deleteTaskList: (todoId: string, taskListId: string) => set(
     (state) => {
-      const curTodo = state.todos.find((todo) => todo.id === todoId);
-      const curTaskListId = curTodo.tasksList.findIndex((taskList) => taskList.id === taskListId);
-      curTodo.tasksList.splice(curTaskListId, 1);
+      const todo = findTodo<StateType>(todoId, state);
+      const curTaskListId = todo.tasksList.findIndex((taskList) => taskList.id === taskListId);
+      todo.tasksList.splice(curTaskListId, 1);
     },
   ),
   addTask: (todoId: string, taskListId: string, title: string, description: string) => set(
     (state) => {
-      const curTodo = state.todos.find((todo) => todo.id === todoId);
-      const curTaskList = curTodo.tasksList.find((taskList) => taskList.id === taskListId);
-      curTaskList.tasks.unshift(createTask(title, description));
+      const taskList = findTaskList<StateType>(todoId, taskListId, state);
+      taskList.tasks.unshift(createTask(title, description));
     },
   ),
   deleteTask: (todoId: string, taskListId: string, taskId: string) => set(
     (state) => {
-      const curTodo = state.todos.find((todo) => todo.id === todoId);
-      const curTaskList = curTodo.tasksList.find((taskList) => taskList.id === taskListId);
-      const curTaskId = curTaskList.tasks.findIndex((task) => task.id === taskId);
-      curTaskList.tasks.splice(curTaskId, 1);
+      const taskList = findTaskList<StateType>(todoId, taskListId, state);
+      const curTaskId = taskList.tasks.findIndex((task) => task.id === taskId);
+      taskList.tasks.splice(curTaskId, 1);
     },
   ),
   changeTaskStatus: (todoId: string, taskListId: string, taskId: string) => set(
     (state) => {
-      const curTodo = state.todos.find((todo) => todo.id === todoId);
-      const curTaskList = curTodo.tasksList.find((taskList) => taskList.id === taskListId);
-      const curTask = curTaskList.tasks.find((task) => task.id === taskId);
-      curTask.isDone = !curTask.isDone;
+      const task = findTask(todoId, taskListId, taskId, state);
+      task.isDone = !task.isDone;
     },
   ),
 })));
