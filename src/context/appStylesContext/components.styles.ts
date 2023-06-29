@@ -61,22 +61,22 @@ const componentsTheme = createTheme({
     },
     MuiSwitch: {
       styleOverrides: {
-        switchBase: {
-          color: '#0288d1',
-        },
-        colorPrimary: {
+        switchBase: ({ ownerState }) => (
+          { color: ownerState.className === 'news' ? '#0288d1' : '#ff5a38' }
+        ),
+        colorPrimary: ({ ownerState }) => ({
           '&.Mui-checked': {
-            color: '#2e7d32',
+            color: ownerState.className === 'news' ? '#2e7d32' : '#2e7d32',
           },
-        },
-        track: {
+        }),
+        track: ({ ownerState }) => ({
           opacity: 0.2,
-          backgroundColor: '#0288d1',
+          backgroundColor: ownerState.className === 'news' ? '#0288d1' : '#ff5a38',
           '.Mui-checked.Mui-checked + &': {
             opacity: 0.7,
-            backgroundColor: '#2e7d32',
+            backgroundColor: ownerState.className === 'news' ? '#2e7d32' : '#2e7d32',
           },
-        },
+        }),
       },
     },
     MuiCheckbox: {

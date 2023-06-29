@@ -44,7 +44,7 @@ export default function TodoHeaderMenu({ todoId, handleClose, element }: TodoHea
       </MenuItem>
       <MenuItem onChange={(e) => showNews(e.target.checked)}>
         <FormControlLabel
-          control={<Switch disabled={isLoading || isRefetching} checked={checked} />}
+          control={<Switch className="news" disabled={isLoading || isRefetching} checked={checked} />}
           labelPlacement="start"
           label="Show news"
         />
